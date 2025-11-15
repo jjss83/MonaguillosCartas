@@ -12,6 +12,7 @@ const massItems = [
 
 let score = 0;
 let draggedCard = null;
+let eventListenersInitialized = false;
 
 // Initialize game
 function initGame() {
@@ -20,7 +21,21 @@ function initGame() {
     clearMessage();
     renderAvailableCards();
     renderDropZones();
-    setupEventListeners();
+    
+    if (!eventListenersInitialized) {
+        setupEventListeners();
+        eventListenersInitialized = true;
+    }
+}
+
+// Fisher-Yates shuffle algorithm for proper randomization
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
 }
 
 // Render available cards (shuffled)
@@ -28,8 +43,8 @@ function renderAvailableCards() {
     const container = document.getElementById('available-cards');
     container.innerHTML = '';
     
-    // Shuffle cards
-    const shuffledItems = [...massItems].sort(() => Math.random() - 0.5);
+    // Shuffle cards using Fisher-Yates algorithm
+    const shuffledItems = shuffleArray(massItems);
     
     shuffledItems.forEach(item => {
         const card = createCard(item);
@@ -44,9 +59,12 @@ function createCard(item) {
     card.draggable = true;
     card.dataset.itemId = item.id;
     card.dataset.order = item.order;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `${item.name} - Arrastra para ordenar`);
+    card.setAttribute('tabindex', '0');
     
     card.innerHTML = `
-        <div class="icon">${item.icon}</div>
+        <div class="icon" aria-hidden="true">${item.icon}</div>
         <div class="name">${item.name}</div>
     `;
     
@@ -74,6 +92,9 @@ function createDropZone(position) {
     zone.className = 'drop-zone';
     zone.dataset.position = `${position}º`;
     zone.dataset.expectedOrder = position;
+    zone.setAttribute('role', 'button');
+    zone.setAttribute('aria-label', `Zona de colocación ${position}`);
+    zone.setAttribute('aria-dropeffect', 'move');
     
     // Add drop event listeners
     zone.addEventListener('dragover', handleDragOver);
