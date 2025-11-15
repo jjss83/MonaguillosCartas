@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Cartas - Artífices de Monaguillo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Juego de Cartas: Artífices del Monaguillo</h1>
+        <p class="instructions">Arrastra las cartas al área de orden correcto siguiendo la secuencia de la Misa</p>
+        
+        <div class="score-container">
+            <span>Puntuación: <span id="score">0</span></span>
+            <button id="reset-btn">Reiniciar</button>
+            <button id="check-btn">Verificar Orden</button>
+        </div>
+
+        <div class="cards-container">
+            <h2>Cartas disponibles</h2>
+            <div id="available-cards" class="cards-area"></div>
+        </div>
+
+        <div class="order-container">
+            <h2>Orden correcto (del 1 al 8)</h2>
+            <div id="order-area" class="order-area"></div>
+        </div>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
