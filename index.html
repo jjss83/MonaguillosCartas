@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monaguillos Cartas - Juego de Orden de Misa</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🕊️ Monaguillos Cartas 🕊️</h1>
+            <p>Ordena los artículos de la misa en el orden correcto</p>
+        </header>
+
+        <div class="game-info">
+            <div class="score">Puntuación: <span id="score">0</span></div>
+            <button id="reset-btn" class="btn">Nueva Partida</button>
+        </div>
+
+        <div class="game-board">
+            <div class="cards-section">
+                <h2>Artículos disponibles</h2>
+                <div id="available-cards" class="cards-container"></div>
+            </div>
+
+            <div class="drop-zone-section">
+                <h2>Orden de la Misa</h2>
+                <div id="drop-zones" class="drop-zones-container"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="check-btn" class="btn btn-primary">Verificar Orden</button>
+        </div>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
